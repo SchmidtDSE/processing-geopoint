@@ -5,3 +5,4 @@ examples/geojson/geotools.pde
 examples/geojson/data/bayarea.csv
 examples/polygon/geotools.pde
 examples/transform/geotools.pde
+examples/transform/transform.png

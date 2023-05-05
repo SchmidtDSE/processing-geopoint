@@ -73,10 +73,10 @@ class GeoPoint {
    * @return The x position of this point after having panned and zoomed.
    */
   public float getX(GeoTransformation transformation) {
-    float pixelX = transformation.getGeoOffset().getX();
-    float offsetX = pixelX + transformation.getPixelOffset().x;
+    float geoOffsetX = transformation.getGeoOffset().getX();
+    float pixelOffsetX = transformation.getPixelOffset().x;
     float scale = transformation.getScale();
-    double result = (x - offsetX) * scale * BASE_SCALE;
+    double result = (getX() - geoOffsetX) * scale + pixelOffsetX;
     return (float) result;
   }
   
@@ -87,10 +87,10 @@ class GeoPoint {
    * @return The y position of this point after having panned and zoomed.
    */
   public float getY(GeoTransformation transformation) {
-    float pixelY = transformation.getGeoOffset().getY();
-    float offsetY = pixelY + transformation.getPixelOffset().y;
+    float geoOffsetY = transformation.getGeoOffset().getY();
+    float pixelOffsetY = transformation.getPixelOffset().y;
     float scale = transformation.getScale();
-    double result = (y - offsetY) * scale * BASE_SCALE;
+    double result = (getY() - geoOffsetY) * scale + pixelOffsetY;
     return (float) result;
   }
   
