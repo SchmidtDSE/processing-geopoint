@@ -3,6 +3,7 @@ examples/basic/geotools.pde
 examples/basic/basic.png
 examples/geojson/geotools.pde
 examples/geojson/data/bayarea.csv
+examples/geojson/geojson.png
 examples/polygon/geotools.pde
 examples/polygon/polygon.png
 examples/transform/geotools.pde
