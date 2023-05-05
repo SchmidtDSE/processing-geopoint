@@ -1,6 +1,6 @@
 Processing Geotools
 ===============================================================================
-Some pieces of code that have been useful for geospatial visualization in Processing under a friendly license.
+Some pieces of code that have been useful for geospatial visualization in [Processing](https://processing.org) under a friendly license.
 
 <br>
 
