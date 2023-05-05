@@ -36,7 +36,7 @@ xvfb-run ./scratch/processing-4.2/processing-java --sketch=examples/geojson --ru
 sleep 1
 
 echo "[7 / 7] Checking results"
-[[ ! -f examples/geojson/bayarea.csv ]] && exit 1
+[[ ! -f examples/geojson/data/bayarea.csv ]] && exit 1
 [[ ! -f examples/basic/basic.png ]] && exit 1
 [[ ! -f examples/transform/transform.png ]] && exit 1
 [[ ! -f examples/polygon/polygon.png ]] && exit 1
