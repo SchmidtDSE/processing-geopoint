@@ -6,7 +6,7 @@ Some pieces of code that have been useful for geospatial visualization in Proces
 
 Purpose
 -------------------------------------------------------------------------------
-Need to convert longitude / latitude to x / y coordinates in your Processing sketches? Not inteded to be a full library, this captures and formalizes some web mercator code for Processing / Java commonly used internally during prototyping within our data visualization studio. It allows for the construction of points that can be projected between "geo-space" (latitude / longitude coordinates on the Earth) and "pixel-space" (x / y coordinates on the screen). It also offers shortcuts for transformations like panning and zooming as well as drawing polygons using points defined in geo-space but rendered in pixel space.
+Need to convert longitude / latitude to x / y coordinates in your Processing sketches? Not inteded to be a full library, this captures and formalizes some web mercator code for Processing / Java commonly used internally during prototyping within our data visualization studio. It allows for the construction of points that can be projected between "geo-space" (latitude / longitude coordinates on the Earth) and "pixel-space" (x / y coordinates on the screen). It also offers shortcuts for transformations like panning and zooming as well as drawing polygons using points defined in geo-space but rendered in pixel space. This can be used to render geojson polygons with the addition of a little Python script.
 
 <br>
 
