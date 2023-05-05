@@ -7,7 +7,7 @@ void setup() {
   float centerLatitude = 37.761842;
   float centerX = 250;
   float centerY = 250;
-  float mapScale = 100;
+  float mapScale = 10;
 
   // Use the tool
   ArrayList<GeoPoint> points = new ArrayList<>();

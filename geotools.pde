@@ -26,7 +26,7 @@ class GeoPoint {
   
   private final static double RADIUS_MAJOR = 6378137.0;
   private final static double RADIUS_MINOR = 6356752.3142;
-  private final static double BASE_SCALE = 0.00001;
+  private final static double BASE_SCALE = 0.0001;
 
   private final float longitude;
   private final float latitude;

@@ -1,7 +1,7 @@
 void setup() {
   // Prepare
   size(500, 500);
-  translate(250, 250);
+  translate(-2000, 500);
 
   // Position of UC Berkeley
   float longitude = -122.262938; 

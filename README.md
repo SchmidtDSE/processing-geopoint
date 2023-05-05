@@ -27,7 +27,7 @@ The simpliest operation is converting a point in geo-space to pixel-space like i
 void setup() {
   // Prepare
   size(500, 500);
-  translate(250, 250);
+  translate(-2000, 500);
 
   // Position of UC Berkeley
   float longitude = -122.262938; 
@@ -41,6 +41,7 @@ void setup() {
   float yPosition = point.getY();
   noStroke();
   fill(#333333);
+  println(xPosition, yPosition);
   ellipse(xPosition, yPosition, 10, 10);
 
   // Save
@@ -72,7 +73,7 @@ void setup() {
   float centerLatitude = 37.761842;
   float centerX = 250;
   float centerY = 250;
-  float mapScale = 100;
+  float mapScale = 10;
 
   // Use the tool
   GeoPoint point = new GeoPoint(pointLongitude, pointLatitude);
@@ -85,6 +86,7 @@ void setup() {
   // Draw
   float xPosition = point.getX(transformation);
   float yPosition = point.getY(transformation);
+  println(xPosition, yPosition);
   noStroke();
   fill(#333333);
   ellipse(xPosition, yPosition, 10, 10);
@@ -113,7 +115,7 @@ void setup() {
   float centerLatitude = 37.761842;
   float centerX = 250;
   float centerY = 250;
-  float mapScale = 100;
+  float mapScale = 10;
 
   // Use the tool
   ArrayList<GeoPoint> points = new ArrayList<>();
@@ -155,37 +157,46 @@ python polygon_to_csv.py ./san_francisco.geojson ./san_francisco.csv
 One can then use native CSV functionality in Processing to render the shape:
 
 ```
-# Prepare
-size(500, 500);
+void setup() {
+  // Prepare
+  size(500, 500);
+  background(#0000F0);
 
-# Center the map on San Francisco and place in middle of sketch
-float centerLongitude = -122.418343;
-float centerLatitude = 37.761842;
-float centerX = 250;
-float centerY = 250;
-float mapScale = 1000;
+  // Center the map on San Francisco and place in middle of sketch
+  float centerLongitude = -122.418343;
+  float centerLatitude = 37.761842;
+  float centerX = 250;
+  float centerY = 250;
+  float mapScale = 100;
 
-# Use the tool
-ArrayList<GeoPoint> points = new ArrayList<>();
-Table polygonTable = loadTable("bayarea.csv", "header");
-for (TableRow row : polygonTable.rows()) {
-  float longitude = row.getFloat("longitude");
-  float latitude = row.getFloat("latitude");
-  points.add(new GeoPoint(longitude, latitude));
+  // Use the tool
+  ArrayList<GeoPoint> points = new ArrayList<>();
+  Table polygonTable = loadTable("bayarea.csv", "header");
+  for (TableRow row : polygonTable.rows()) {
+    float longitude = row.getFloat("longitude");
+    float latitude = row.getFloat("latitude");
+    points.add(new GeoPoint(longitude, latitude));
+  }
+
+  GeoPolygon polygon = new GeoPolygon(points);
+
+  GeoTransformation transformation = new GeoTransformation(
+    new GeoPoint(centerLongitude, centerLatitude),
+    new PVector(centerX, centerY),
+    mapScale
+  );
+
+  // Draw
+  stroke(#333333);
+  fill(#00A000);
+  polygon.draw(transformation);
+
+  save("geojson.png");
 }
 
-GeoPolygon polygon = new GeoPolygon(points);
-
-GeoTransformation transformation = new GeoTransformation(
-  new GeoPoint(centerLongitude, centerLatitude),
-  new PVector(centerX, centerY),
-  mapScale
-);
-
-# Draw
-fill(#A0A0A0);
-noStroke();
-polygon.draw(transformation);
+void draw() {
+  exit();
+}
 ```
 
 <br>

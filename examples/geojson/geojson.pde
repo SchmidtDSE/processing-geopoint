@@ -1,14 +1,14 @@
 void setup() {
   // Prepare
   size(500, 500);
-  background(#FFFFFF);
+  background(#0000F0);
 
   // Center the map on San Francisco and place in middle of sketch
   float centerLongitude = -122.418343;
   float centerLatitude = 37.761842;
   float centerX = 250;
   float centerY = 250;
-  float mapScale = 1000;
+  float mapScale = 100;
 
   // Use the tool
   ArrayList<GeoPoint> points = new ArrayList<>();
@@ -29,7 +29,7 @@ void setup() {
 
   // Draw
   stroke(#333333);
-  fill(#A0A0A0);
+  fill(#00A000);
   polygon.draw(transformation);
 
   save("geojson.png");
