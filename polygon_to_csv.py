@@ -1,3 +1,16 @@
+"""Script to convert a polygon from geojson to a list of points in CSV.
+
+This script can be used on geojson files containing either a polygon feature or
+a MultiPolygon containing exactly one polygon. Users needing multiple polygons
+will need to use a tool like QGIS to create individual geojson files per shape.
+This script can be invoked by calling python polygon_to_csv.py.
+
+(c) 2023 Regents of University of California / The Eric and Wendy Schmidt Center
+for Data Science and the Environment at UC Berkeley.
+
+This file is part of afscgap released under the BSD 3-Clause License. See
+LICENSE.md.
+"""
 import csv
 import json
 import sys
@@ -7,6 +20,7 @@ NUM_ARGS = 2
 
 
 def main():
+    """Run the script."""
     if len(sys.argv) != NUM_ARGS + 1:
         print(USAGE_STR)
         return
