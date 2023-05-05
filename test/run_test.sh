@@ -21,9 +21,11 @@ cp geotools.pde ./examples/transform
 echo "[5 / 7] Clear prior results"
 [[ -f examples/basic/basic.png ]] && rm examples/basic/basic.png
 [[ -f examples/transform/transform.png ]] && rm examples/transform/transform.png
+[[ -f examples/polygon/polygon.png ]] && rm examples/polygon/polygon.png
 
 echo "[6 / 7] Running sketches"
 xvfb-run ./scratch/processing-4.2/processing-java --sketch=examples/basic --run
 xvfb-run ./scratch/processing-4.2/processing-java --sketch=examples/transform --run
+xvfb-run ./scratch/processing-4.2/processing-java --sketch=examples/polygon --run
 
 echo "[7 / 7] Checking results"
