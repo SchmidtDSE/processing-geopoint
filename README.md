@@ -1,12 +1,20 @@
 Processing Geotools
 ===============================================================================
-Some pieces of code that have been useful for geospatial visualization in Processing under a friendly license.
+Some pieces of code that have been useful for geospatial visualization in [Processing](https://processing.org) under a friendly license.
 
 <br>
 
 Purpose
 -------------------------------------------------------------------------------
-Need to convert longitude / latitude to x / y coordinates in your Processing sketches? Not inteded to be a full library, this captures and formalizes some web mercator code for Processing / Java commonly used internally during prototyping within our data visualization studio. It allows for the construction of points that can be projected between "geo-space" (latitude / longitude coordinates on the Earth) and "pixel-space" (x / y coordinates on the screen). It also offers shortcuts for transformations like panning and zooming as well as drawing polygons using points defined in geo-space but rendered in pixel space. This can be used to render geojson polygons with the addition of a little Python script.
+Need to convert longitude / latitude to x / y coordinates in your Processing sketches?
+
+Not inteded to be a full library, this captures and formalizes some geospatial visualization code for Processing / Java commonly we've often used internally during prototyping within our data visualization studio. Using the [web mercator](https://en.wikipedia.org/wiki/Web_Mercator_projection) projection, it allows for:
+
+ - The construction of points that can be projected between "geo-space" (latitude / longitude coordinates on the Earth) and "pixel-space" (x / y coordinates on the screen).
+ - Shortcuts for common map transformations like panning and zooming.
+ - Drawing geospatial polygons (using points defined in geo-space but rendered in pixel space).
+
+Finally, this can be used to render geojson polygons with the addition of a little Python script.
 
 <br>
 
@@ -53,7 +61,7 @@ void draw() {
 }
 ```
 
-Note that the order of providing parameters is horizontal position (longitude) followed by vertical position (latitude).
+The order of providing parameters is horizontal position (longitude) followed by vertical position (latitude). Note that a large transformation was required because, by default, the drawing centers at 0 latitude and 0 longitude.
 
 
 #### Scale and transform
@@ -100,10 +108,10 @@ void draw() {
 }
 ```
 
-Note that the map automatically has a map scale of 1e-5 applied by default.
+Note that the map has a base scale of 1e-4 and scale is multiplied by that base scale.
 
 #### Draw a polygon
-Sometimes it is helpful to draw a polygon defined in geo-space in pixel-space. This can be helpful for bounding boxes, for example.
+Sometimes it is helpful to take a polygon defined in geo-space and draw it in pixel-space. This can be helpful for bounding boxes, for example.
 
 ```
 void setup() {
@@ -145,10 +153,10 @@ void draw() {
 }
 ```
 
-Note that `draw` will build a polygon by calling `vertex` between `beginShape` and `endShape`. For more details, see the [Processing documenation on shapes]().
+Note that `draw` will build a polygon by calling `vertex` between `beginShape` and `endShape`. For more details, see the [Processing documenation on shapes](https://processing.org/reference/vertex_.html).
 
 #### Draw a geojson
-Need to draw a polygon inside a GeoJson? There is a small Python script to convert to a CSV of points (you'll need [Python 3]()).
+Need to draw a polygon inside a GeoJson? There is a small Python script to convert a GeoJson to a CSV of points (you'll need [Python 3](https://docs.python-guide.org/starting/installation/)).
 
 ```
 python polygon_to_csv.py ./san_francisco.geojson ./san_francisco.csv
@@ -203,13 +211,13 @@ void draw() {
 
 Local Development Environment
 -------------------------------------------------------------------------------
-This project simply requires installation of [Processing 4]() though use of the `polygon_to_csv.py` script requires installation of [Python 3]().
+This project simply requires installation of [Processing 4](https://processing.org) though use of the `polygon_to_csv.py` script requires installation of [Python 3](https://docs.python-guide.org/starting/installation/).
 
 <br>
 
 Development Standards
 -------------------------------------------------------------------------------
-Please adhere to 2 spaces tabs and otherwise follow the [Java style standard conventions](). All methods and classes should have [Javadoc](). For Python code, please follow the [Google Python Style Guide]() where possible. Code should strive for 80% test coverage. See the `_test` files for more details.
+Where reasonable, please adhere to 2 spaces tabs and otherwise follow the [Java style standard conventions](https://google.github.io/styleguide/javaguide.html). All methods and classes should have [Javadoc](https://www.baeldung.com/javadoc). For Python code, please follow the [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html) where reasonable. Code should strive for 80% coverage in terms of being exercised by the automated checks in CI / CD.
 
 <br>
 
