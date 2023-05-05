@@ -136,7 +136,7 @@ float mapScale = 1000;
 
 # Use the tool
 ArrayList<GeoPoint> points = new ArrayList<>();
-Table polygonTable = loadTable("san_francisco.csv", "header");
+Table polygonTable = loadTable("bayarea.csv", "header");
 for (TableRow row : polygonTable.rows()) {
   float longitude = row.getFloat("longitude");
   float latitude = row.getFloat("latitude");
@@ -167,13 +167,13 @@ This project simply requires installation of [Processing 4]() though use of the 
 
 Development Standards
 -------------------------------------------------------------------------------
-Please adhere to 2 spaces tabs and otherwise follow the [Java style standard conventions](). All methods and classes should have [Javadoc](). For Python code, please follow the [Google Python Style Guide]() where possible. Code should strive for 80% unit test coverage. See the `_test` files for more details.
+Please adhere to 2 spaces tabs and otherwise follow the [Java style standard conventions](). All methods and classes should have [Javadoc](). For Python code, please follow the [Google Python Style Guide]() where possible. Code should strive for 80% test coverage. See the `_test` files for more details.
 
 <br>
 
 Deployment
 -------------------------------------------------------------------------------
-This work is provided as source files. However, note that continuous integration will check the unit tests and we ask that contributors ensure their work passes those tests.
+This work is provided as source files. However, note that continuous integration will run automated checks and we ask that contributors ensure their work passes those checks.
 
 <br>
 
