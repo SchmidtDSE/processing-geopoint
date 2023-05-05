@@ -215,7 +215,7 @@ Please adhere to 2 spaces tabs and otherwise follow the [Java style standard con
 
 Deployment
 -------------------------------------------------------------------------------
-This work is provided as source files. However, note that continuous integration will run automated checks and we ask that contributors ensure their work passes those checks.
+This work is provided as source files. However, note that continuous integration will run automated checks and we ask that contributors ensure their work passes those checks. Note that this also offers an open source example of using Python from inside Github Actions.
 
 <br>
 
