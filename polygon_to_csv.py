@@ -21,10 +21,19 @@ def main():
     feature = source['features'][0]
     geometry = feature['geometry']
 
-    assert geometry['type'] == 'Polygon'
+    if geometry['type'] == 'MultiPolygon':
+        shapes = geometry['coordinates'][0]
+        if len(shapes) != 1:
+            raise RuntimeException('MultiPolygon must have one polygon.')
+        shape = shapes[0]
+    elif geometry['type'] == 'Polygon':
+        shape = geometry['coordinates'][0]
+    else:
+        raise RuntimeException('Only support for MultiPolygon and Polygon.')
+    
     dicts = map(
         lambda x: {'longitude': x[0], 'latitude': x[1]},
-        geometry['coordinates'][0]
+        shape
     )
 
     with open(dest_loc, 'w') as f:

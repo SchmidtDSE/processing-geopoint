@@ -16,7 +16,6 @@
  * @license BSD
  */
 
-import java.util.Iterable;
 import java.util.List;
 
 
@@ -53,7 +52,8 @@ class GeoPoint {
    * @return The x position of this point without transformation.
    */
   public float getX() {
-    return (float) x * BASE_SCALE;
+    double xScaled = x * BASE_SCALE;
+    return (float) xScaled;
   }
   
   /**
@@ -62,7 +62,8 @@ class GeoPoint {
    * @return The y position of this point without transformation.
    */
   public float getY() {
-    return (float) y * BASE_SCALE;
+    double yScaled = y * BASE_SCALE;
+    return (float) yScaled;
   }
   
   /**
@@ -133,7 +134,7 @@ class GeoPoint {
    */
   private double latitudeToY(float latitude) {
     return Math.log(Math.tan(
-        Math.PI / 4 + Math.toRadians(input) / 2
+        Math.PI / 4 + Math.toRadians(latitude) / 2
     )) * RADIUS_MAJOR;
   }
   

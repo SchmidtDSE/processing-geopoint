@@ -24,20 +24,33 @@ This piece of code offers multiple modalities of usage.
 The simpliest operation is converting a point in geo-space to pixel-space like in this example which draws a dot for UC Berkeley:
 
 ```
-# Prepare
-size(500, 500);
+void setup() {
+  // Prepare
+  size(500, 500);
+  translate(250, 250);
 
-# Position of UC Berkeley
-float longitude = -122.262938; 
-float latitude = 37.873139;
+  // Position of UC Berkeley
+  float longitude = -122.262938; 
+  float latitude = 37.873139;
 
-# Use the tool
-GeoPoint point = new GeoPoint(longitude, latitude);
+  // Use the tool
+  GeoPoint point = new GeoPoint(longitude, latitude);
 
-# Draw
-float xPosition = point.getX();
-float yPosition = point.getY();
-ellipse(xPosition, yPosition, 10, 10);
+  // Draw
+  float xPosition = point.getX();
+  float yPosition = point.getY();
+  noStroke();
+  fill(#333333);
+  println(xPosition, yPosition);
+  ellipse(xPosition, yPosition, 10, 10);
+
+  // Save
+  save("basic.png");
+}
+
+void draw() {
+  exit();
+}
 ```
 
 Note that the order of providing parameters is horizontal position (longitude) followed by vertical position (latitude).
@@ -47,32 +60,7 @@ Note that the order of providing parameters is horizontal position (longitude) f
 It is typically necessary to scale and transform like in this example which centers the map on San Francisco and zooms in.
 
 ```
-# Prepare
-size(500, 500);
 
-# Position of UC Berkeley
-float pointLongitude = -122.262938; 
-float pointLatitude = 37.873139;
-
-# Center the map on San Francisco and place in middle of sketch
-float centerLongitude = -122.418343;
-float centerLatitude = 37.761842;
-float centerX = 250;
-float centerY = 250;
-float mapScale = 1000;
-
-# Use the tool
-GeoPoint point = new GeoPoint(pointLongitude, pointLatitude);
-GeoTransformation transformation = new GeoTransformation(
-  new GeoPoint(centerLongitude, centerLatitude),
-  new PVector(centerX, centerY),
-  mapScale
-);
-
-# Draw
-float xPosition = point.getX(transformation);
-float yPosition = point.getY(transformation);
-ellipse(xPosition, yPosition, 10, 10);
 ```
 
 Note that the map automatically has a map scale of 1e-5 applied by default.
