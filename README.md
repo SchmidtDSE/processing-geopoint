@@ -8,7 +8,7 @@ Purpose
 -------------------------------------------------------------------------------
 Need to convert longitude / latitude to x / y coordinates in your Processing sketches?
 
-Not inteded to be a full library, this captures and formalizes some geospatial visualization code for Processing / Java commonly we've often used internally during prototyping within our data visualization studio. Using the [web mercator](https://en.wikipedia.org/wiki/Web_Mercator_projection) projection, it allows for:
+Not inteded to be a full library, this captures and formalizes some geospatial visualization code for Processing / Java we've often used internally during prototyping within our data visualization studio. Using the [web mercator](https://en.wikipedia.org/wiki/Web_Mercator_projection) projection, it allows for:
 
  - The construction of points that can be projected between "geo-space" (latitude / longitude coordinates on the Earth) and "pixel-space" (x / y coordinates on the screen).
  - Shortcuts for common map transformations like panning and zooming.
