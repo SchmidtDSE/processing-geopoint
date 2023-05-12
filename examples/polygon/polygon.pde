@@ -1,6 +1,9 @@
+import org.dse.geopoint.*;
+
 void setup() {
   // Prepare
   size(500, 500);
+  background(#FFFFFF);
 
   // Center the map on San Francisco and place in middle of sketch
   float centerLongitude = -122.418343;
@@ -20,14 +23,16 @@ void setup() {
 
   GeoTransformation transformation = new GeoTransformation(
     new GeoPoint(centerLongitude, centerLatitude),
-    new PVector(centerX, centerY),
+    new PixelOffset(centerX, centerY),
     mapScale
   );
 
   // Draw
   fill(#333333);
   noStroke();
-  polygon.draw(transformation);
+  beginShape();
+  polygon.draw((x, y) -> vertex(x, y), transformation);
+  endShape();
   save("polygon.png");
 }
 
