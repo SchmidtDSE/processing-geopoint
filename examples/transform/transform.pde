@@ -30,7 +30,6 @@ void setup() {
   float yPosition = point.getY(transformation);
 
   // Draw
-  println(xPosition, yPosition);
   noStroke();
   fill(#333333);
   ellipse(xPosition, yPosition, 10, 10);
