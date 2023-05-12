@@ -25,7 +25,7 @@ Separately, we wish to highlight that Processing developers may also consider us
 <br>
 
 ## Installation
-Simply add our jar to your sketch by dragging and dropping onto your sketch or putting it in the `code` folder. Additional documentation available in our JavaDoc.
+Simply add [our jar](https://schmidtdse.github.io/processing-geopoint/geopoint.jar) to your sketch by dragging and dropping onto your sketch or putting it in the `code` folder. Additional documentation available in our JavaDoc.
 
 <br>
 
@@ -66,6 +66,8 @@ void draw() {
   exit();
 }
 ```
+
+![Circle drawn by latitude and longitude](https://schmidtdse.github.io/processing-geopoint/basic.png "Result of basic sketch")
 
 The order of providing parameters is horizontal position (longitude) followed by vertical position (latitude). Note that a large transformation was required because, by default, the drawing centers at 0 latitude and 0 longitude.
 
@@ -119,6 +121,8 @@ void draw() {
 }
 ```
 
+![Circle drawn by latitude and longitude with scale / transform](https://schmidtdse.github.io/processing-geopoint/transform.png "Result of scale and transform sketch")
+
 Note that the map has a base scale of 1e-4 and scale is multiplied by that base scale.
 
 ### Draw a polygon
@@ -168,6 +172,8 @@ void draw() {
   exit();
 }
 ```
+
+![Square drawn by latitude and longitude points](https://schmidtdse.github.io/processing-geopoint/polygon.png "Result of polygon sketch")
 
 Note that this will build a polygon by calling `vertex` for each point between `beginShape` and `endShape`. For more details, see the [Processing documenation on shapes](https://processing.org/reference/vertex_.html).
 
@@ -226,6 +232,10 @@ void draw() {
   exit();
 }
 ```
+
+![Map of San Francisco Bay Area](https://schmidtdse.github.io/processing-geopoint/geojson.png "Result of geojson sketch")
+
+See the python script for more details.
 
 <br>
 
