@@ -17,7 +17,7 @@ Finally, this can be used to render geojson polygons with the addition of a litt
 
 <br>
 
-#### Limitations / relation to other efforts
+### Limitations / relation to other efforts
 This is not meant to be a full library like [Unfolding](http://unfoldingmaps.org/) but big hat tip to [contributors working to get it to the latest Processing](https://github.com/tillnagel/unfolding/pull/119). This is not meant to achieve that level of functionality and is more of a small bit of code to include if users wish to keep all of the geospatial transformations in sketch-level code for whatever reason.
 
 Separately, we wish to highlight that Processing developers may also consider use of [Java Geotools](https://geotools.org/) which can be used in sketches. In contrast, this is meant to be a much smaller interface simply for doing quick projections of points and geometries.
@@ -32,16 +32,16 @@ Simply add our jar to your sketch by dragging and dropping onto your sketch or p
 ## Usage
 This piece of code offers multiple modalities of usage.
 
-#### Convert lat / lon to x / y
+### Convert lat / lon to x / y
 The simpliest operation is converting a point in geo-space to pixel-space like in this example which draws a dot for UC Berkeley:
 
-```
+```java
 import org.dse.geopoint.*;
 
 void setup() {
   // Prepare
   size(500, 500);
-  background(#FFFFFF);
+  background(#F0F0F0);
   translate(1500, -400);
 
   // Position of UC Berkeley
@@ -70,16 +70,16 @@ void draw() {
 The order of providing parameters is horizontal position (longitude) followed by vertical position (latitude). Note that a large transformation was required because, by default, the drawing centers at 0 latitude and 0 longitude.
 
 
-#### Scale and transform
+### Scale and transform
 It is typically necessary to scale and transform like in this example which centers the map on San Francisco and zooms in.
 
-```
+```java
 import org.dse.geopoint.*;
 
 void setup() {
   // Prepare
   size(500, 500);
-  background(#FFFFFF);
+  background(#F0F0F0);
 
   // Position of UC Berkeley
   float pointLongitude = -122.262938; 
@@ -121,16 +121,16 @@ void draw() {
 
 Note that the map has a base scale of 1e-4 and scale is multiplied by that base scale.
 
-#### Draw a polygon
+### Draw a polygon
 Sometimes it is helpful to take a polygon defined in geo-space and draw it in pixel-space. This can be helpful for bounding boxes, for example.
 
-```
+```java
 import org.dse.geopoint.*;
 
 void setup() {
   // Prepare
   size(500, 500);
-  background(#FFFFFF);
+  background(#F0F0F0);
 
   // Center the map on San Francisco and place in middle of sketch
   float centerLongitude = -122.418343;
@@ -171,16 +171,16 @@ void draw() {
 
 Note that this will build a polygon by calling `vertex` for each point between `beginShape` and `endShape`. For more details, see the [Processing documenation on shapes](https://processing.org/reference/vertex_.html).
 
-#### Draw a geojson
+### Draw a geojson
 Need to draw a polygon inside a GeoJson? There is a small Python script to convert a GeoJson to a CSV of points (you'll need [Python 3](https://docs.python-guide.org/starting/installation/)).
 
-```
+```bash
 python polygon_to_csv.py ./san_francisco.geojson ./san_francisco.csv
 ```
 
 One can then use native CSV functionality in Processing to render the shape:
 
-```
+```java
 import org.dse.geopoint.*;
 
 void setup() {

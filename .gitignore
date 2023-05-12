@@ -1,5 +1,6 @@
 scratch
 build
+public
 examples/basic/code/geopoint.jar
 examples/basic/basic.png
 examples/geojson/code/geopoint.jar
