@@ -30,7 +30,7 @@ jobs:
       - name: Run tests
         run: bash test/run_test.sh
       - name: Build docs
-        run: bash test/build_docs.sh
+        run: bash build_docs.sh
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
