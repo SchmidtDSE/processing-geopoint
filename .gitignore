@@ -1,10 +1,11 @@
 scratch
-examples/basic/geotools.pde
+build
+examples/basic/code/geopoint.jar
 examples/basic/basic.png
-examples/geojson/geotools.pde
+examples/geojson/code/geopoint.jar
 examples/geojson/data/bayarea.csv
 examples/geojson/geojson.png
-examples/polygon/geotools.pde
+examples/polygon/code/geopoint.jar
 examples/polygon/polygon.png
-examples/transform/geotools.pde
+examples/transform/code/geopoint.jar
 examples/transform/transform.png
