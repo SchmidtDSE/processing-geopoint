@@ -25,7 +25,7 @@ Separately, we wish to highlight that Processing developers may also consider us
 <br>
 
 ## Installation
-Simply add our jar to your sketch by dragging and dropping. Additional documentation available in our JavaDoc.
+Simply add our jar to your sketch by dragging and dropping onto your sketch or putting it in the `code` folder. Additional documentation available in our JavaDoc.
 
 <br>
 
@@ -41,6 +41,7 @@ import org.dse.geopoint.*;
 void setup() {
   // Prepare
   size(500, 500);
+  background(#FFFFFF);
   translate(1500, -400);
 
   // Position of UC Berkeley
@@ -55,7 +56,6 @@ void setup() {
   float yPosition = point.getY(); // Note there is also latitudeToY
   noStroke();
   fill(#333333);
-  println(xPosition, yPosition);
   ellipse(xPosition, yPosition, 100, 100);
 
   // Save
@@ -63,7 +63,7 @@ void setup() {
 }
 
 void draw() {
-  //exit();
+  exit();
 }
 ```
 
@@ -79,6 +79,7 @@ import org.dse.geopoint.*;
 void setup() {
   // Prepare
   size(500, 500);
+  background(#FFFFFF);
 
   // Position of UC Berkeley
   float pointLongitude = -122.262938; 
@@ -130,6 +131,7 @@ import org.dse.geopoint.*;
 void setup() {
   // Prepare
   size(500, 500);
+  background(#FFFFFF);
 
   // Center the map on San Francisco and place in middle of sketch
   float centerLongitude = -122.418343;
