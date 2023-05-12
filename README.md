@@ -1,6 +1,6 @@
 Processing Geopoint
 ===============================================================================
-Some pieces of code that have been useful for geospatial visualization in [Processing](https://processing.org) under a friendly license.
+Some pieces of code that have been useful for geospatial visualization in [Processing](https://processing.org) under a friendly license as a micro-library.
 
 <br>
 
@@ -230,7 +230,7 @@ void draw() {
 
 Local Development Environment
 -------------------------------------------------------------------------------
-This project simply requires installation of [Processing 4](https://processing.org) though use of the `polygon_to_csv.py` script requires installation of [Python 3](https://docs.python-guide.org/starting/installation/).
+This project's examples simply require installation of [Processing 4](https://processing.org) though use of the `polygon_to_csv.py` script requires installation of [Python 3](https://docs.python-guide.org/starting/installation/). Developers of this micro-library itself will need an [OpenJDK](https://adoptium.net/).
 
 <br>
 
@@ -242,7 +242,7 @@ Where reasonable, please adhere to 2 spaces tabs and otherwise follow the [Java 
 
 Deployment
 -------------------------------------------------------------------------------
-This work is provided as source files. However, note that continuous integration will run automated checks and we ask that contributors ensure their work passes those checks. Note that this also offers an open source example of using Python from inside Github Actions.
+This work is provided as a jar buildable via `bash build.sh`. However, note that continuous integration will run automated checks and we ask that contributors ensure their work passes those checks. Note that this also offers an open source example of using Python from inside Github Actions.
 
 <br>
 
