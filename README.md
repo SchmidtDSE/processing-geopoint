@@ -1,41 +1,48 @@
-Processing Geotools
+Processing Geopoint
 ===============================================================================
-Some pieces of code that have been useful for geospatial visualization in [Processing](https://processing.org) under a friendly license.
+Some pieces of code that have been useful for geospatial visualization in [Processing](https://processing.org) under a friendly license as a micro-library.
 
 <br>
 
-Purpose
--------------------------------------------------------------------------------
+## Purpose
 Need to convert longitude / latitude to x / y coordinates in your Processing sketches?
 
-Not inteded to be a full library, this captures and formalizes some geospatial visualization code for Processing / Java we've often used internally during prototyping within our data visualization studio. Using the [web mercator](https://en.wikipedia.org/wiki/Web_Mercator_projection) projection, it allows for:
+Not inteded to be a full library, this captures and formalizes some geospatial visualization code for Processing / Java we've often used internally during prototyping within our data visualization studio. Using the [web mercator](https://en.wikipedia.org/wiki/Web_Mercator_projection) projection, it allows for quick prototyping by supporting:
 
  - The construction of points that can be projected between "geo-space" (latitude / longitude coordinates on the Earth) and "pixel-space" (x / y coordinates on the screen).
  - Shortcuts for common map transformations like panning and zooming.
  - Drawing geospatial polygons (using points defined in geo-space but rendered in pixel space).
 
-Finally, this can be used to render geojson polygons with the addition of a little Python script.
+Finally, this can be used to render geojson polygons with the addition of a little Python.
 
 <br>
 
-Installation
--------------------------------------------------------------------------------
-This repository simply open sources commonly used code internally and this is not a formalized Processing library. Simply add the `geotools.pde` file to your sketch folder.
+#### Limitations / relation to other efforts
+This is not meant to be a full library like [Unfolding](http://unfoldingmaps.org/) but big hat tip to [contributors working to get it to the latest Processing](https://github.com/tillnagel/unfolding/pull/119). This is not meant to achieve that level of functionality and is more of a small bit of code to include if users wish to keep all of the geospatial transformations in sketch-level code for whatever reason.
+
+Separately, we wish to highlight that Processing developers may also consider use of [Java Geotools](https://geotools.org/) which can be used in sketches. In contrast, this is meant to be a much smaller interface simply for doing quick projections of points and geometries.
 
 <br>
 
-Usage
--------------------------------------------------------------------------------
+## Installation
+Simply add our jar to your sketch by dragging and dropping onto your sketch or putting it in the `code` folder. Additional documentation available in our JavaDoc.
+
+<br>
+
+## Usage
 This piece of code offers multiple modalities of usage.
 
 #### Convert lat / lon to x / y
 The simpliest operation is converting a point in geo-space to pixel-space like in this example which draws a dot for UC Berkeley:
 
 ```
+import org.dse.geopoint.*;
+
 void setup() {
   // Prepare
   size(500, 500);
-  translate(-2000, 500);
+  background(#FFFFFF);
+  translate(1500, -400);
 
   // Position of UC Berkeley
   float longitude = -122.262938; 
@@ -45,12 +52,11 @@ void setup() {
   GeoPoint point = new GeoPoint(longitude, latitude);
 
   // Draw
-  float xPosition = point.getX();
-  float yPosition = point.getY();
+  float xPosition = point.getX(); // Note there is also longitudeToX
+  float yPosition = point.getY(); // Note there is also latitudeToY
   noStroke();
   fill(#333333);
-  println(xPosition, yPosition);
-  ellipse(xPosition, yPosition, 10, 10);
+  ellipse(xPosition, yPosition, 100, 100);
 
   // Save
   save("basic.png");
@@ -68,9 +74,12 @@ The order of providing parameters is horizontal position (longitude) followed by
 It is typically necessary to scale and transform like in this example which centers the map on San Francisco and zooms in.
 
 ```
+import org.dse.geopoint.*;
+
 void setup() {
   // Prepare
   size(500, 500);
+  background(#FFFFFF);
 
   // Position of UC Berkeley
   float pointLongitude = -122.262938; 
@@ -87,14 +96,16 @@ void setup() {
   GeoPoint point = new GeoPoint(pointLongitude, pointLatitude);
   GeoTransformation transformation = new GeoTransformation(
     new GeoPoint(centerLongitude, centerLatitude),
-    new PVector(centerX, centerY),
+    new PixelOffset(centerX, centerY),
     mapScale
   );
 
-  // Draw
+  // Get position
+  // Note there is also longitudeToX and latitudeToY for reverse projection.
   float xPosition = point.getX(transformation);
   float yPosition = point.getY(transformation);
-  println(xPosition, yPosition);
+
+  // Draw
   noStroke();
   fill(#333333);
   ellipse(xPosition, yPosition, 10, 10);
@@ -114,9 +125,12 @@ Note that the map has a base scale of 1e-4 and scale is multiplied by that base 
 Sometimes it is helpful to take a polygon defined in geo-space and draw it in pixel-space. This can be helpful for bounding boxes, for example.
 
 ```
+import org.dse.geopoint.*;
+
 void setup() {
   // Prepare
   size(500, 500);
+  background(#FFFFFF);
 
   // Center the map on San Francisco and place in middle of sketch
   float centerLongitude = -122.418343;
@@ -136,14 +150,16 @@ void setup() {
 
   GeoTransformation transformation = new GeoTransformation(
     new GeoPoint(centerLongitude, centerLatitude),
-    new PVector(centerX, centerY),
+    new PixelOffset(centerX, centerY),
     mapScale
   );
 
   // Draw
   fill(#333333);
   noStroke();
-  polygon.draw(transformation);
+  beginShape();
+  polygon.draw((x, y) -> vertex(x, y), transformation);
+  endShape();
   save("polygon.png");
 }
 
@@ -153,7 +169,7 @@ void draw() {
 }
 ```
 
-Note that `draw` will build a polygon by calling `vertex` between `beginShape` and `endShape`. For more details, see the [Processing documenation on shapes](https://processing.org/reference/vertex_.html).
+Note that this will build a polygon by calling `vertex` for each point between `beginShape` and `endShape`. For more details, see the [Processing documenation on shapes](https://processing.org/reference/vertex_.html).
 
 #### Draw a geojson
 Need to draw a polygon inside a GeoJson? There is a small Python script to convert a GeoJson to a CSV of points (you'll need [Python 3](https://docs.python-guide.org/starting/installation/)).
@@ -165,6 +181,8 @@ python polygon_to_csv.py ./san_francisco.geojson ./san_francisco.csv
 One can then use native CSV functionality in Processing to render the shape:
 
 ```
+import org.dse.geopoint.*;
+
 void setup() {
   // Prepare
   size(500, 500);
@@ -190,14 +208,16 @@ void setup() {
 
   GeoTransformation transformation = new GeoTransformation(
     new GeoPoint(centerLongitude, centerLatitude),
-    new PVector(centerX, centerY),
+    new PixelOffset(centerX, centerY),
     mapScale
   );
 
   // Draw
   stroke(#333333);
   fill(#00A000);
-  polygon.draw(transformation);
+  beginShape();
+  polygon.draw((x, y) -> vertex(x, y), transformation);
+  endShape();
 
   save("geojson.png");
 }
@@ -211,7 +231,7 @@ void draw() {
 
 Local Development Environment
 -------------------------------------------------------------------------------
-This project simply requires installation of [Processing 4](https://processing.org) though use of the `polygon_to_csv.py` script requires installation of [Python 3](https://docs.python-guide.org/starting/installation/).
+This project's examples simply require installation of [Processing 4](https://processing.org) though use of the `polygon_to_csv.py` script requires installation of [Python 3](https://docs.python-guide.org/starting/installation/). Developers of this micro-library itself will need an [OpenJDK](https://adoptium.net/).
 
 <br>
 
@@ -223,7 +243,7 @@ Where reasonable, please adhere to 2 spaces tabs and otherwise follow the [Java 
 
 Deployment
 -------------------------------------------------------------------------------
-This work is provided as source files. However, note that continuous integration will run automated checks and we ask that contributors ensure their work passes those checks. Note that this also offers an open source example of using Python from inside Github Actions.
+This work is provided as a jar buildable via `bash build.sh`. However, note that continuous integration will run automated checks and we ask that contributors ensure their work passes those checks. Note that this also offers an open source example of using Python from inside Github Actions.
 
 <br>
 

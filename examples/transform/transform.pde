@@ -1,6 +1,9 @@
+import org.dse.geopoint.*;
+
 void setup() {
   // Prepare
   size(500, 500);
+  background(#FFFFFF);
 
   // Position of UC Berkeley
   float pointLongitude = -122.262938; 
@@ -17,14 +20,16 @@ void setup() {
   GeoPoint point = new GeoPoint(pointLongitude, pointLatitude);
   GeoTransformation transformation = new GeoTransformation(
     new GeoPoint(centerLongitude, centerLatitude),
-    new PVector(centerX, centerY),
+    new PixelOffset(centerX, centerY),
     mapScale
   );
 
-  // Draw
+  // Get position
+  // Note there is also longitudeToX and latitudeToY for reverse projection.
   float xPosition = point.getX(transformation);
   float yPosition = point.getY(transformation);
-  println(xPosition, yPosition);
+
+  // Draw
   noStroke();
   fill(#333333);
   ellipse(xPosition, yPosition, 10, 10);

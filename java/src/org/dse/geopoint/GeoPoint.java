@@ -1,10 +1,11 @@
 /**
- * Some simple pieces of code for geospatial visualizations in Processing.
+ * Some simple pieces of code for projecting points.
  *
  * <p>
  * Some simple pieces of code for geospatial visualizations in Processing that
- * use a web mercator projection. Short of a full library, this snippet helps
- * jumpstart Processing developers' efforts in working with geospatial data.
+ * use a web mercator projection to project points from lat / lng to x / y
+ * and visa-versa. Short of a full library, this snippet helps jumpstart
+ * Processing developers' efforts in working with geospatial data.
  * </p>
  *
  * <p>
@@ -16,13 +17,13 @@
  * @license BSD
  */
 
-import java.util.List;
+package org.dse.geopoint;
 
 
 /**
  * A latitude / longitude point that an be converted to x / y coordinates.
  */
-class GeoPoint {
+public class GeoPoint {
   
   private final static double RADIUS_MAJOR = 6378137.0;
   private final static double RADIUS_MINOR = 6356752.3142;
@@ -74,7 +75,7 @@ class GeoPoint {
    */
   public float getX(GeoTransformation transformation) {
     float geoOffsetX = transformation.getGeoOffset().getX();
-    float pixelOffsetX = transformation.getPixelOffset().x;
+    float pixelOffsetX = transformation.getPixelOffset().getX();
     float scale = transformation.getScale();
     double result = (getX() - geoOffsetX) * scale + pixelOffsetX;
     return (float) result;
@@ -88,7 +89,7 @@ class GeoPoint {
    */
   public float getY(GeoTransformation transformation) {
     float geoOffsetY = transformation.getGeoOffset().getY();
-    float pixelOffsetY = transformation.getPixelOffset().y;
+    float pixelOffsetY = transformation.getPixelOffset().getY();
     float scale = transformation.getScale();
     double result = (getY() - geoOffsetY) * scale + pixelOffsetY;
     return (float) result;
@@ -136,122 +137,6 @@ class GeoPoint {
     return Math.log(Math.tan(
         Math.PI / 4 + Math.toRadians(latitude) / 2
     )) * RADIUS_MAJOR;
-  }
-  
-}
-
-
-/**
- * A transformation to use in projecting a GeoPoint with a pan and zoom.
- *
- * <p>
- * A record of a desired transformation to use in projecting a GeoPoint with a
- * pan and zoom such that this record can be passed to a GeoPoint when
- * requesting its pixel-space position.
- * </p>
- */
-class GeoTransformation {
-  
-  private final GeoPoint geoOffset;
-  private final PVector pixelOffset;
-  private final float scale;
-  
-  /**
-   * Create a new transformation.
-   *
-   * @param newGeoOffset Where in geo-space (latitude and longitude) the
-   *    display should be centered.
-   * @param newPixelOffset Where in pixel space (x and y coordinates) the
-   *    display should be centered.
-   * @param newScale The zoom level that should be used when projecting a
-   *    GeoPoint.
-   */
-  public GeoTransformation(GeoPoint newGeoOffset, PVector newPixelOffset,
-    float newScale) {
-    geoOffset = newGeoOffset;
-    pixelOffset = newPixelOffset;
-    scale = newScale;
-  }
-  
-  /**
-   * Get the center of the display in geo-space.
-   *
-   * @return Geospatical coordinates that should be the center of the
-   *    projection.
-   */
-  public GeoPoint getGeoOffset() {
-    return geoOffset;
-  }
-  
-  /**
-   * Get the center of the display in pixel-space.
-   *
-   * @return Pixel coordinates that should be the center of the projection.
-   */
-  public PVector getPixelOffset() {
-    return pixelOffset;
-  }
-  
-  /**
-   * Get the scaling factor for this transformation.
-   *
-   * @return Scale or zoom factor.
-   */
-  public float getScale() {
-    return scale;
-  }
-  
-}
-
-
-/**
- * A collection of GeoPoints which can be drawn in a group as a polygon.
- */
-class GeoPolygon {
-
-  private final List<GeoPoint> points;
-  
-  /**
-   * Create a new polygon.
-   *
-   * @param newPoints The points of the polygon in order that they should
-   *    be drawn.
-   */
-  public GeoPolygon(List<GeoPoint> newPoints) {
-    points = newPoints;
-  }
-  
-  /**
-   * Get the points that make up this polygon.
-   *
-   * @return Iterable over the points in this polygon in drawing order.
-   */
-  public Iterable<GeoPoint> getPoints() {
-    return points;
-  }
-  
-  /**
-   * Draw this polygon without panning or zooming.
-   */
-  public void draw() {
-    beginShape();
-    for (GeoPoint point : getPoints()) {
-      vertex(point.getX(), point.getY());
-    }
-    endShape();
-  }
-  
-  /**
-   * Draw this polygon with a transformation applied.
-   *
-   * @param transformation The pan / zoom to be applied when drawing.
-   */
-  public void draw(GeoTransformation transformation) {
-    beginShape();
-    for (GeoPoint point : getPoints()) {
-      vertex(point.getX(transformation), point.getY(transformation));
-    }
-    endShape();
   }
   
 }

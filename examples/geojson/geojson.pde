@@ -1,3 +1,5 @@
+import org.dse.geopoint.*;
+
 void setup() {
   // Prepare
   size(500, 500);
@@ -23,14 +25,16 @@ void setup() {
 
   GeoTransformation transformation = new GeoTransformation(
     new GeoPoint(centerLongitude, centerLatitude),
-    new PVector(centerX, centerY),
+    new PixelOffset(centerX, centerY),
     mapScale
   );
 
   // Draw
   stroke(#333333);
   fill(#00A000);
-  polygon.draw(transformation);
+  beginShape();
+  polygon.draw((x, y) -> vertex(x, y), transformation);
+  endShape();
 
   save("geojson.png");
 }

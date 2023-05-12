@@ -20,10 +20,14 @@ echo "[4 / 7] Building polygon CSV"
 python polygon_to_csv.py ./examples/geojson/data/bayarea.geojson ./examples/geojson/data/bayarea.csv
 
 echo "[5 / 7] Distributing copides of geotools..."
-cp geotools.pde ./examples/basic
-cp geotools.pde ./examples/geojson
-cp geotools.pde ./examples/polygon
-cp geotools.pde ./examples/transform
+mkdir -p examples/basic/code
+mkdir -p examples/geojson/code
+mkdir -p examples/polygon/code
+mkdir -p examples/transform/code
+cp build/geopoint.jar examples/basic/code
+cp build/geopoint.jar examples/geojson/code
+cp build/geopoint.jar examples/polygon/code
+cp build/geopoint.jar examples/transform/code
 
 echo "[6 / 7] Running sketches"
 xvfb-run ./scratch/processing-4.2/processing-java --sketch=examples/basic --run
