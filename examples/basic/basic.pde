@@ -3,7 +3,7 @@ import org.dse.geopoint.*;
 void setup() {
   // Prepare
   size(500, 500);
-  background(#FFFFFF);
+  background(#F0F0F0);
   translate(1500, -400);
 
   // Position of UC Berkeley

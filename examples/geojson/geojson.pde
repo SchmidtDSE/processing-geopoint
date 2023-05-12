@@ -3,7 +3,7 @@ import org.dse.geopoint.*;
 void setup() {
   // Prepare
   size(500, 500);
-  background(#0000F0);
+  background(#F0F0F0);
 
   // Center the map on San Francisco and place in middle of sketch
   float centerLongitude = -122.418343;
@@ -30,8 +30,8 @@ void setup() {
   );
 
   // Draw
-  stroke(#333333);
-  fill(#00A000);
+  stroke(#C0C0C0);
+  fill(#A0A0A0);
   beginShape();
   polygon.draw((x, y) -> vertex(x, y), transformation);
   endShape();

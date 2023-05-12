@@ -3,7 +3,7 @@ import org.dse.geopoint.*;
 void setup() {
   // Prepare
   size(500, 500);
-  background(#FFFFFF);
+  background(#F0F0F0);
 
   // Center the map on San Francisco and place in middle of sketch
   float centerLongitude = -122.418343;
