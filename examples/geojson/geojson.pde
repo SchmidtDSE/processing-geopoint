@@ -30,7 +30,7 @@ void setup() {
   );
 
   // Draw
-  stroke(#C0C0C0);
+  stroke(#444444);
   fill(#333333);
   beginShape();
   polygon.draw((x, y) -> vertex(x, y), transformation);
