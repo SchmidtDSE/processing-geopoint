@@ -134,7 +134,7 @@ public class GeoPoint {
    * @return Un-transformed y coordinate.
    */
   private double latitudeToY(float latitude) {
-    return Math.log(Math.tan(
+    return -1 * Math.log(Math.tan(
         Math.PI / 4 + Math.toRadians(latitude) / 2
     )) * RADIUS_MAJOR;
   }
