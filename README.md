@@ -7,6 +7,7 @@ Some pieces of code that have been useful for geospatial visualization in [Proce
 [BART example using the processing-geopoint library](https://github.com/SchmidtDSE/bart-ridership-example).
 
 <br>
+<br>
 
 ## Purpose
 Need to convert longitude / latitude to x / y coordinates in your Processing sketches?
@@ -20,6 +21,7 @@ Not inteded to be a full library, this captures and formalizes some geospatial v
 Finally, this can be used to render geojson polygons with the addition of a little Python.
 
 <br>
+<br>
 
 ### Limitations / relation to other efforts
 This is not meant to be a full library like [Unfolding](http://unfoldingmaps.org/) but big hat tip to [contributors working to get it to the latest Processing](https://github.com/tillnagel/unfolding/pull/119). This is not meant to achieve that level of functionality and is more of a small bit of code to include if users wish to keep all of the geospatial transformations in sketch-level code for whatever reason.
@@ -27,14 +29,18 @@ This is not meant to be a full library like [Unfolding](http://unfoldingmaps.org
 Separately, we wish to highlight that Processing developers may also consider use of [Java Geotools](https://geotools.org/) which can be used in sketches. In contrast, this is meant to be a much smaller interface simply for doing quick projections of points and geometries.
 
 <br>
+<br>
 
 ## Installation
 Simply add [our jar](https://schmidtdse.github.io/processing-geopoint/geopoint.jar) to your sketch by dragging and dropping onto your sketch or putting it in the `code` folder. Additional documentation available in our JavaDoc.
 
 <br>
+<br>
 
 ## Usage
 This piece of code offers multiple modalities of usage.
+
+<br>
 
 ### Convert lat / lon to x / y
 The simpliest operation is converting a point in geo-space to pixel-space like in this example which draws a dot for UC Berkeley:
@@ -75,6 +81,7 @@ void draw() {
 
 The order of providing parameters is horizontal position (longitude) followed by vertical position (latitude). Note that a large transformation was required because, by default, the drawing centers at 0 latitude and 0 longitude.
 
+<br>
 
 ### Scale and transform
 It is typically necessary to scale and transform like in this example which centers the map on San Francisco and zooms in.
@@ -129,6 +136,8 @@ void draw() {
 
 Note that the map has a base scale of 1e-4 and scale is multiplied by that base scale.
 
+<br>
+
 ### Draw a polygon
 Sometimes it is helpful to take a polygon defined in geo-space and draw it in pixel-space. This can be helpful for bounding boxes, for example.
 
@@ -180,6 +189,8 @@ void draw() {
 ![Square drawn by latitude and longitude points](https://schmidtdse.github.io/processing-geopoint/polygon.png "Result of polygon sketch")
 
 Note that this will build a polygon by calling `vertex` for each point between `beginShape` and `endShape`. For more details, see the [Processing documenation on shapes](https://processing.org/reference/vertex_.html).
+
+<br>
 
 ### Draw a geojson
 Need to draw a polygon inside a GeoJson? There is a small Python script to convert a GeoJson to a CSV of points (you'll need [Python 3](https://docs.python-guide.org/starting/installation/)).
@@ -243,10 +254,17 @@ See the python script for more details.
 
 <br>
 
+### BART ridership demo
+A more involved "realistic" demo is available at the [BART Ridership Demo repository](https://github.com/SchmidtDSE/bart-ridership-example). This is the animated GIF linked at the top of the README.
+
+<br>
+<br>
+
 Local Development Environment
 -------------------------------------------------------------------------------
 This project's examples simply require installation of [Processing 4](https://processing.org) though use of the `polygon_to_csv.py` script requires installation of [Python 3](https://docs.python-guide.org/starting/installation/). Developers of this micro-library itself will need an [OpenJDK](https://adoptium.net/).
 
+<br>
 <br>
 
 Development Standards
@@ -254,17 +272,20 @@ Development Standards
 Where reasonable, please adhere to 2 spaces tabs and otherwise follow the [Java style standard conventions](https://google.github.io/styleguide/javaguide.html). All methods and classes should have [Javadoc](https://www.baeldung.com/javadoc). For Python code, please follow the [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html) where reasonable. Code should strive for 80% coverage in terms of being exercised by the automated checks in CI / CD.
 
 <br>
+<br>
 
 Deployment
 -------------------------------------------------------------------------------
 This work is provided as a jar buildable via `bash build.sh`. However, note that continuous integration will run automated checks and we ask that contributors ensure their work passes those checks. Note that this also offers an open source example of using Python from inside Github Actions.
 
 <br>
+<br>
 
 Contributing
 -------------------------------------------------------------------------------
 Pull requests and bug reports welcome. We do not have a formalized template but please be kind. Open source is often a labor of love done outside work hours / pay. We may decline to fulfill a bug or merge a PR in which case we politely recommend a fork.
 
+<br>
 <br>
 
 License and open source
