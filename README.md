@@ -3,6 +3,7 @@ Processing Geopoint
 Some pieces of code that have been useful for geospatial visualization in [Processing](https://processing.org) under a friendly license as a micro-library.
 
 ![Animated screenshot of a visualization showing journeys within BART using processing-geopoint.](https://gleap.org/static/img/bart_demo.gif)
+
 [BART example using the processing-geopoint library](https://github.com/SchmidtDSE/bart-ridership-example).
 
 <br>
